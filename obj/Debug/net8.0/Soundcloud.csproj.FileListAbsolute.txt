@@ -1,0 +1,14 @@
+C:\Users\Gustavo\source\repos\Soundcloud\Soundcloud\bin\Debug\net8.0\Soundcloud.exe
+C:\Users\Gustavo\source\repos\Soundcloud\Soundcloud\bin\Debug\net8.0\Soundcloud.deps.json
+C:\Users\Gustavo\source\repos\Soundcloud\Soundcloud\bin\Debug\net8.0\Soundcloud.runtimeconfig.json
+C:\Users\Gustavo\source\repos\Soundcloud\Soundcloud\bin\Debug\net8.0\Soundcloud.dll
+C:\Users\Gustavo\source\repos\Soundcloud\Soundcloud\bin\Debug\net8.0\Soundcloud.pdb
+C:\Users\Gustavo\source\repos\Soundcloud\Soundcloud\obj\Debug\net8.0\Soundcloud.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Gustavo\source\repos\Soundcloud\Soundcloud\obj\Debug\net8.0\Soundcloud.AssemblyInfoInputs.cache
+C:\Users\Gustavo\source\repos\Soundcloud\Soundcloud\obj\Debug\net8.0\Soundcloud.AssemblyInfo.cs
+C:\Users\Gustavo\source\repos\Soundcloud\Soundcloud\obj\Debug\net8.0\Soundcloud.csproj.CoreCompileInputs.cache
+C:\Users\Gustavo\source\repos\Soundcloud\Soundcloud\obj\Debug\net8.0\Soundcloud.dll
+C:\Users\Gustavo\source\repos\Soundcloud\Soundcloud\obj\Debug\net8.0\refint\Soundcloud.dll
+C:\Users\Gustavo\source\repos\Soundcloud\Soundcloud\obj\Debug\net8.0\Soundcloud.pdb
+C:\Users\Gustavo\source\repos\Soundcloud\Soundcloud\obj\Debug\net8.0\Soundcloud.genruntimeconfig.cache
+C:\Users\Gustavo\source\repos\Soundcloud\Soundcloud\obj\Debug\net8.0\ref\Soundcloud.dll
