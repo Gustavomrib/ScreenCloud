@@ -3,25 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-// Armazenamento das bandas dicionario
+// Armazenamento das bandas (Dicionário)
 Dictionary<string, List<int>> registroBandas = new Dictionary<string, List<int>>();
 bool exibirMenu = true;
 
-// Função para padronizar os títulos ( eu refatorei esse codigo )
+// Função para padronizar os títulos
 void ExibirTitulo(string titulo)
 {
     Console.Clear();
-    Console.ForegroundColor = ConsoleColor.Cyan; // Cor do título
+    Console.ForegroundColor = ConsoleColor.Cyan;
 
     string linha = new string('═', titulo.Length + 4);
     Console.WriteLine(linha);
     Console.WriteLine($"  {titulo.ToUpper()}  ");
     Console.WriteLine(linha);
 
-    Console.ResetColor(); // Volta para o padrão para não pintar o resto do código
+    Console.ResetColor();
     Console.WriteLine();
 }
-//m laço while
+
+// Laço Principal
 while (exibirMenu)
 {
     ExibirTitulo("SCREEN SOUND - MENU PRINCIPAL");
@@ -48,9 +49,12 @@ while (exibirMenu)
             case 3:
                 AvaliarBanda();
                 break;
+            case 4:
+                ExibirMedia();
+                break;
             case -1:
-                Console.WriteLine("Tchau tchau! Até a próxima.");
-                exibirMenu = false; // Aqui encerramos o loop com segurança
+                Console.WriteLine("\nTchau tchau! Até a próxima.");
+                exibirMenu = false;
                 break;
             default:
                 Console.WriteLine("Opção inválida!");
@@ -78,6 +82,9 @@ void RegistrarBanda()
         }
         else
         {
+            // CORREÇÃO: Adicionando a banda ao dicionário com uma lista de notas vazia
+            registroBandas.Add(nomeDaBanda, new List<int>());
+
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"\nBanda '{nomeDaBanda}' registrada com sucesso!");
             Console.ResetColor();
@@ -85,44 +92,97 @@ void RegistrarBanda()
 
         Console.Write("\nDeseja registrar outra banda? (S/N): ");
         string resposta = Console.ReadLine()!.ToUpper();
-
-        if (resposta != "S")
-        {
-            registrarMais = false;
-        }
+        if (resposta != "S") registrarMais = false;
     }
 
     Console.WriteLine("\nRetornando ao menu...");
-    Thread.Sleep(1500);
+    Thread.Sleep(1000);
 }
 
 void ExibirBandas()
 {
     ExibirTitulo("LISTA DE BANDAS");
-    foreach (var banda in registroBandas.Keys)
+
+    if (registroBandas.Count == 0)
     {
-        Console.WriteLine($"Banda: {banda}");
+        Console.WriteLine("Nenhuma banda registrada no momento.");
     }
-    Console.WriteLine("\nDigite qualquer tecla para voltar...");
-    Console.ReadKey();
+    else
+    {
+        foreach (var banda in registroBandas.Keys)
+        {
+            Console.WriteLine($"* {banda}");
+        }
+    }
+
+    Console.WriteLine("\nRetornando ao menu...");
+    Thread.Sleep(1000);
 }
 
 void AvaliarBanda()
 {
-    Console.Clear();
-    Console.ForegroundColor = ConsoleColor.Cyan;
-    ExibirTitulo("Avaliar banda");
-    Console.Write("Digite o nome da banda que deseja avaliar: ");
-    string NomeBanda = Console.ReadLine()!;
-    if (registroBandas.ContainsKey(NomeBanda))
-    {
+    ExibirTitulo("AVALIAR BANDA");
+    
+    bool RegistrarMais = true;
 
+    while (RegistrarMais)
+    {
+        Console.Write("Digite o nome da banda que deseja avaliar: ");
+        string nomeBanda = Console.ReadLine()!;
+
+        if (registroBandas.ContainsKey(nomeBanda))
+        {
+            Console.Write($"\nDigite a nota para {nomeBanda}: ");
+            if (int.TryParse(Console.ReadLine(), out int nota))
+            {
+                registroBandas[nomeBanda].Add(nota);
+                Console.WriteLine($"\nA nota {nota} foi registrada com sucesso para a banda {nomeBanda}!");
+            }
+            else
+            {
+                Console.WriteLine("\nNota inválida! Use apenas números.");
+            }
+        }
+        else
+        {
+            Console.WriteLine($"\nA banda '{nomeBanda}' não foi encontrada.");
+            Console.WriteLine("Tente digitar o nome novamente.");
+            continue;
+        }
+
+        Console.Write("\nDeseja registrar outra nota? (S/N): ");
+        string resposta = Console.ReadLine()!.ToUpper();
+        if (resposta != "S") RegistrarMais = false;
+    }
+    Console.WriteLine("\nRetornando ao menu...");
+    Thread.Sleep(1000);
+
+}
+
+    void ExibirMedia()
+{
+    ExibirTitulo("MÉDIA DA BANDA");
+    Console.Write("Digite o nome da banda: ");
+    string nomeBanda = Console.ReadLine()!;
+
+    if (registroBandas.ContainsKey(nomeBanda))
+    {
+        List<int> notas = registroBandas[nomeBanda];
+        if (notas.Count > 0)
+        {
+            double media = notas.Average(); // Usando System.Linq
+            Console.WriteLine($"\nA média da banda {nomeBanda} é: {media:F1}");
+        }
+        else
+        {
+            Console.WriteLine($"\nA banda {nomeBanda} ainda não possui notas registradas.");
+        }
     }
     else
     {
-        Console.WriteLine($"A banda {NomeBanda} não existe");
-        Console.WriteLine("digite uma qualquer para voltar ao menu principal");
-        Console.ReadKey();
-        Console.Clear();""
+        Console.WriteLine($"\nA banda '{nomeBanda}' não existe.");
     }
+
+    Console.WriteLine("\nRetornando ao menu...");
+    Thread.Sleep(1000);
 }
